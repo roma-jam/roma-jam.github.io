@@ -28,8 +28,6 @@ const pathname = Astro.url.pathname;
   <body>
     <header class="site-header">
       <nav class="container navigation" aria-label="Main navigation">
-        <a class="site-name" href="/">Roman Leonov</a>
-
         <div class="nav-links">
           <a href="/" aria-current={pathname === '/' ? 'page' : undefined}>
             Home
@@ -50,11 +48,6 @@ const pathname = Astro.url.pathname;
 
     <footer class="container site-footer">
       <span>© {new Date().getFullYear()} Roman Leonov</span>
-      <a href="https://github.com/roma-jam"
-         target="_blank"
-         rel="noopener noreferrer">
-        GitHub
-      </a>
     </footer>
   </body>
 </html>
