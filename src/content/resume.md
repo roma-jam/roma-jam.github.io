@@ -3,7 +3,7 @@
 
 **Senior Embedded Software Engineer**
 
-Berlin, Germany
+📍 Berlin, Germany
 
 [GitHub](https://github.com/roma-jam)
 
@@ -49,7 +49,6 @@ Key contributions:
   state-machine architecture.
 - Maintained Espressif's TinyUSB integration and
   coordinated upstream synchronization.
-- Developed hardware-in-the-loop CI infrastructure.
 - Contributed ESP32-P4 support upstream to TinyUSB.
 
 ### Embedded Software Team Lead — Aladdin R.D.
@@ -77,8 +76,7 @@ Key contributions:
 - Architected the reusable JaCarta 3 embedded platform.
 - Designed fault-tolerant dual-slot firmware updates.
 - Implemented secure firmware update mechanisms.
-- Developed USB composite devices and storage systems.
-- Ported RexOS to Nordic nRF51/nRF52 microcontrollers.
+- Developed USB composite devices and USB storage systems.
 
 ### Firmware Engineer — WWPass
 
@@ -105,18 +103,14 @@ authentication tokens and smart-card readers.
 
 *USB Area Collaborator · June 2026 – Present*
 
-Contributing to USB development in the Zephyr RTOS
+Contributing to USB Host development in the Zephyr RTOS
 project.
 
-### Espressif ESP-IDF
+### RexOS
 
-Contributed to the ESP-IDF USB subsystem and its
-supporting components.
+*Contributor · May 2017 – Aug 2023*
 
-### TinyUSB
-
-Contributed upstream platform support and maintained
-Espressif integrations.
+- Ported RexOS to Nordic nRF51/nRF52 microcontrollers.
 
 ## Education
 
@@ -130,6 +124,6 @@ radio and electronic systems development.
 
 ## Languages
 
-- English — C1
-- German — B2
+- English — Very good in speaking and writing
+- German — BSK B2
 - Russian — Native
