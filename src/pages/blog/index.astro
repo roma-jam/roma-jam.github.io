@@ -1,0 +1,134 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (
+  await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  )
+).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Engineering Notes | Roman Leonov"
+  description="Technical notes on embedded systems, electronics, USB, and open-source development by Roman Leonov."
+>
+  <div class="blog-page">
+    <section aria-label="Blog articles">
+      {posts.length === 0 ? (
+        <p>No articles published yet.</p>
+      ) : (
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="post">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  timeZone: 'UTC',
+                })}
+              </time>
+
+              {post.data.draft && (
+                <span class="draft-label">Draft</span>
+              )}
+
+              <h2>
+                <a href={`/blog/${post.id}/`}>
+                  {post.data.title} ↗
+                </a>
+              </h2>
+
+              <p>{post.data.description}</p>
+
+              <div class="tags">
+                {post.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-page {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin: 0 0 1.25rem;
+  }
+
+  .accent-line {
+    width: 80px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--gradient-accent);
+  }
+
+  header {
+    margin-bottom: 3rem;
+  }
+
+  header p {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+    font-size: 1.1rem;
+  }
+
+  .post-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .post {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  time {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+  }
+
+  .draft-label {
+    color: var(--color-purple);
+    font-size: 0.8rem;
+    margin-left: 0.75rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 0.5rem 0;
+  }
+
+  .post p {
+    color: var(--color-muted);
+    margin: 0.5rem 0 1rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    background: #e9eaf7;
+    color: var(--color-purple);
+  }
+</style>

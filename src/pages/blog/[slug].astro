@@ -1,0 +1,156 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  );
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={`${post.data.title} | Roman Leonov`}
+  description={post.data.description}
+>
+  <article class="blog-article">
+    <header>
+      <a class="back-link" href="/blog/">
+        ← All articles
+      </a>
+
+      {post.data.draft && <p class="draft-label">Draft</p>}
+
+      <h1>{post.data.title}</h1>
+
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC',
+        })}
+      </time>
+
+      <div class="accent-line"></div>
+    </header>
+
+    <div class="article-content">
+      <Content />
+    </div>
+
+    <footer>
+      <a href="/blog/">← Back to Engineering Notes</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-article {
+    width: 100%;
+    max-width: 780px;
+    margin-inline: auto;
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    margin: 1.5rem 0 1rem;
+  }
+
+  time {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .draft-label {
+    color: var(--color-purple);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 80px;
+    height: 4px;
+    margin-top: 1.5rem;
+    border-radius: 4px;
+    background: var(--gradient-accent);
+  }
+
+  .article-content {
+    margin-top: 2.5rem;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+  }
+
+  .article-content :global(h2) {
+    margin-top: 2.5rem;
+    font-size: 1.6rem;
+  }
+
+  .article-content :global(h3) {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .article-content :global(p) {
+    margin-block: 1rem;
+  }
+
+  .article-content :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .article-content :global(pre) {
+    padding: 1.25rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .article-content :global(code) {
+    font-size: 0.9em;
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--color-purple);
+    padding-left: 1.25rem;
+    margin-left: 0;
+    color: var(--color-muted);
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+</style>
