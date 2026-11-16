@@ -1,0 +1,191 @@
+
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const zephyr = [
+  { 
+    name: 'UHC DWC2 Driver',
+    description: 'Generic USB Host driver for USB OTG DWC2 Controller',
+    url: 'https://github.com/zephyrproject-rtos/zephyr/issues/102931'  
+  },
+];
+
+const espressif = [
+  {
+    name: 'ESP32-H2 Direct Boot',
+    description: 'Direct boot example for ESP32-H2 microcontroller.',
+    url: 'https://github.com/espressif/esp32c3-direct-boot-example/pull/13',
+  },
+];
+
+const personalProjects = [
+  {
+    name: 'RExOS',
+    description: 'RExOS is very thin embedded RTOS, based on exokernel architecture.',
+    url: 'https://github.com/alexeyk13/rexos',
+  },
+  {
+    name: 'STM32 Flash Update',
+    description: 'Implementation of static RAM function to update Flash memory on STM32 microcontrollers.',
+    url: 'https://github.com/roma-jam/stm32_flash_update',
+  },
+  {
+    name: 'USB Switcher',
+    description: 'USB HID device with possibility to imitate connection/disconnection.',
+    url: 'https://github.com/roma-jam/usb_switcher',
+  },
+];
+---
+
+<BaseLayout
+  title="Contributions | Roman Leonov"
+  description="Open-source contributions and personal engineering projects."
+>
+  <div class="contributions-page">
+    <header class="page-header">
+      <h1>Open-source Contributions</h1>
+      <div class="accent-line"></div>
+    </header>
+
+    <section aria-labelledby="oss-heading">
+      <h2 id="oss-heading">Zephyr RTOS</h2>
+
+      <ul class="project-list">
+        {zephyr.map((project) => (
+          <li class="project">
+            <h3>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.name} ↗
+              </a>
+            </h3>
+            <p>{project.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="oss-heading">
+      <h2 id="oss-heading">Espressif</h2>
+
+      <ul class="project-list">
+        {espressif.map((project) => (
+          <li class="project">
+            <h3>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.name} ↗
+              </a>
+            </h3>
+            <p>{project.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="personal-heading">
+      <h2 id="personal-heading">Personal Projects</h2>
+
+      <ul class="project-list">
+        {personalProjects.map((project) => (
+          <li class="project">
+            <h3>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.name} ↗
+              </a>
+            </h3>
+            <p>{project.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .contributions-page {
+    width: 100%;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin-block: 0 1.25rem;
+  }
+
+  .accent-line {
+    width: 80px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--gradient-accent);
+  }
+
+  .page-header p {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+    font-size: 1.1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project {
+    margin-bottom: 1.75rem;
+  }
+
+  .project h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .project a {
+    color: var(--color-blue);
+  }
+
+  .project a:hover {
+    color: var(--color-purple);
+  }
+
+  .project p {
+    color: var(--color-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+  }
+</style>
